@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html  lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<script src="dist/js/jquery-1.12.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="livraria.js"></script>
+	<!-- Incluindo o CSS do Bootstrap -->
+	<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- Incluindo o JavaScript do Bootstrap -->
+	<script src="dist/js/bootstrap.min.js"></script>
+</head>
+
+<body ng-controller='LivrariaController as lc'>
+	<div ng-app="Livraria" ng-controller='LivrariaController as lc'>
+<div >
+
+   <form class="form-horizontal" name="formItem">
+   	<label class="control-label" for="inputEmail">Titulo:</label>
+   					<input type="text" ng-model="db.titulo">
+  	<label class="control-label" for="inputEmail">Autores:</label>
+ 			 		<input type="text" ng-model="db.autores">
+ 	<label class="control-label" for="inputEmail">Descrição:</label>
+  					<input type="text" ng-model="db.descricao">
+  	<label class="control-label" for="inputEmail">url:</label>
+  					<input type="text" ng-model="db.url">
+  	<label class="control-label" for="inputEmail">Preço:</label>
+  					<input type="real" ng-model="db.preco">
+  <button ng-click="adicionaItem()">Adicionar Livro</button>
+</form>
+<br><br>
+<div class="col-md-3"> <p> <img ng-src="{{lc.livro.url}}" height="350" width="320"> </p> </div>
+<div class="col-md-6">
+
+			<p> Titulo: {{lc.livro.titulo}} </p>
+			<p> Descrição: {{lc.livro.descricao}} </p>
+			<p> Autores: </p>
+       		 <ul>
+                	<li ng-repeat="autor in lc.livro.autores">{{autor}}</li>
+        		</ul>
+        		<p> Preço: {{lc.livro.preco}} </p>
+        		
+        		<p> Comentários: </p>
+       		 <ul>
+                	<li ng-repeat="autor in lc.livro.comentarios">{{autor}}</li>
+        		</ul>
+			<ul>
+                <li ng-repeat="livro in db"></li>
+        	</ul>
+        	<form class="form-horizontal" name="coment">
+  			<label class="control-label" for="inputcoment">Comentário:</label>
+  					<input type="text" ng-model="db.comentarios">
+ 			 <button ng-click="lc.adicionacomentario(db.comentario)">Adicionar Comentário</button>
+		</form>
+        	<button ng-click="lc.next()"> Proximo</button>
+</div>
+      <table border="1" class="table table-striped" >
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Autores</th>
+          <th>Descricao</th>
+          <th>Preco</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="livro in db">
+          <td><strong>{{ livro.titulo }}</strong></td>
+          <td>{{ livro.autores }}</td>
+          <td><strong>{{ livro.descricao }}</strong></td>
+          <td><strong>{{ livro.preco }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+		</div>
+	</div>
+
+</body>
+</html>
